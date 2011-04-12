@@ -1,8 +1,6 @@
 # HtmlField Module
 
-## Maintainer Contact
-
- * Timon Reinhard <hallo (at) timonreinhard (dot) de>
+Provides a [CodeMirror](http://codemirror.net/)-powered field for pleasant editing of raw HTML code.
 
 ## Requirements
 
@@ -15,12 +13,27 @@
 
 ## Installation Instructions
 
-<Step by step instructions>
+*  Put the module into the root folder of your Silverstripe installation.
+*  Run /dev/build?flush=all
 
 ## Usage Overview
 
-<Highlevel usage, refer to wiki documentation for details>
+Example for replacing Silverstripe's built-in TinyMCE with CodeMirror:
 
-## Known issues
+<pre>
+&lt;?php
+class HtmlPage extends Page {
 
-<Popular issues, how to solve them, and links to tickets in the bugtracker>
+    function getCMSFields() {
+        $fields = parent::getCMSFields();
+        $fields->removeFieldFromTab('Root.Content.Main', 'Content');
+        $fields->addFieldToTab('Root.Content.Main', new HtmlField('Content', "HTML Content"));
+        return $fields;
+    }
+
+}
+</pre>
+
+## Known Limitations
+
+*  This field can not be used in frontend forms.
