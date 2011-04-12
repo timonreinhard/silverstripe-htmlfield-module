@@ -4,7 +4,7 @@ Provides a [CodeMirror](http://codemirror.net/)-powered field for pleasant editi
 
 ## Requirements
 
- * Silverstripe 2.4
+ * Silverstripe 2.4.5
 
 ## Project Links
 
@@ -15,6 +15,7 @@ Provides a [CodeMirror](http://codemirror.net/)-powered field for pleasant editi
 
 *  Put the module into the root folder of your Silverstripe installation.
 *  Run /dev/build?flush=all
+*  Run /admin/?flush=all
 
 ## Usage Overview
 
