@@ -9,21 +9,24 @@
  */
 class HtmlField extends TextareaField {
 
-    function __construct($name, $title = null, $rows = 5, $cols = 20, $value = '', $form = null) {
-        parent::__construct($name, $title = null, $rows, $cols, $value = '', $form = null);
+    function __construct($name, $title = null, $value = null) {
+        parent::__construct($name, $title, $value);
         $this->addExtraClass('htmlfield');
     }
 
-    function FieldHolder() {
-        Requirements::backend()->css('htmlfield/thirdparty/codemirror/css/codemirror.css');
-        Requirements::backend()->javascript('htmlfield/thirdparty/codemirror/js/codemirror.js');
-        Requirements::backend()->css('htmlfield/css/HtmlField.css');
-        Requirements::backend()->javascriptTemplate('htmlfield/javascript/HtmlField.js', array(
+    public function FieldHolder($properties = array()) {
+        $obj = ($properties) ? $this->customise($properties) : $this;
+
+        Requirements::css('htmlfield/thirdparty/codemirror/css/codemirror.css');
+        Requirements::javascript('htmlfield/thirdparty/codemirror/js/codemirror.js');
+        Requirements::css('htmlfield/css/HtmlField.css');
+        Requirements::javascriptTemplate('htmlfield/javascript/HtmlField.js', array(
             'Id' => $this->id(),
-            'Height' => 'height: ' . ($this->rows * 16) . 'px',
+            'Height' => ($this->rows * 16) . 'px',
             'Path' => Director::absoluteBaseURL() . 'htmlfield/thirdparty/codemirror'
         ));
-        return parent::FieldHolder();
+
+        return $obj->renderWith($this->getFieldHolderTemplates());
     }
 
 }
