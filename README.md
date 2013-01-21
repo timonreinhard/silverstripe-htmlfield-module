@@ -4,7 +4,7 @@ Provides a [CodeMirror](http://codemirror.net/)-powered field for pleasant editi
 
 ## Requirements
 
- * Silverstripe 2.4.5
+ * SilverStripe 3.0
 
 ## Project Links
 
@@ -13,13 +13,13 @@ Provides a [CodeMirror](http://codemirror.net/)-powered field for pleasant editi
 
 ## Installation Instructions
 
-*  Put the module into the root folder of your Silverstripe installation.
+*  Put the module into the root folder of your SilverStripe installation.
 *  Run /dev/build?flush=all
 *  Run /admin/?flush=all
 
 ## Usage Overview
 
-Example for replacing Silverstripe's built-in TinyMCE with CodeMirror:
+Example for replacing SilverStripe's built-in TinyMCE editor with CodeMirror:
 
 <pre>
 &lt;?php
@@ -27,8 +27,10 @@ class HtmlPage extends Page {
 
     function getCMSFields() {
         $fields = parent::getCMSFields();
-        $fields->removeFieldFromTab('Root.Content.Main', 'Content');
-        $fields->addFieldToTab('Root.Content.Main', new HtmlField('Content', "HTML Content"));
+        $fields->removeFieldFromTab('Root.Main', 'Content');
+        $fields->addFieldToTab('Root.Main', $html_editor = HtmlField::create('Content', 'HTML Content'));
+        $html_editor->setRows(20);
+        
         return $fields;
     }
 
